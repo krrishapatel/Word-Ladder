@@ -12,7 +12,6 @@ class Graph:
             Args:
               adjacency_list (dict[str, set[str]]): An adjaceny list model of our Graph
         '''
-        ### BEGIN SOLUTION
         self.__adjacency_list = adjacency_list
         self.__vertices = set(adjacency_list.keys())
         self.__edges = set()
@@ -21,8 +20,6 @@ class Graph:
             for neighbor in neighbors:
                 self.__edges.add(tuple(sorted((vertex, neighbor))))
     
-
-        ### END SOLUTION
   
     @property
     def vertices(self):
@@ -36,11 +33,9 @@ class Graph:
     
     def is_vertex(self, vertex:str) -> bool:
        '''Determines whether a vertex is present on the graph'''
-       ### BEGIN SOLUTION
 
        return vertex in self.__vertices
 
-       ### END SOLUTION
 
     def get_neighbors(self, vertex:str) -> set[str]:
         '''Accessor method for the neighbors of an edge
@@ -51,14 +46,12 @@ class Graph:
             Returns:
               set[str] : A set of strings representing all the neighbors of the vertex
         '''
-        ### BEGIN SOLUTION
 
         if vertex not in self.vertices:
            return set()
         else:
            return self.__adjacency_list.get(vertex, set())
 
-        ### END SOLUTION
     
     def is_valid_path(self, path:tuple[str]) -> bool:
        ''' Determines whether a given path is a valid path on the graph
@@ -69,14 +62,12 @@ class Graph:
           Returns:
             bool - True if the given path is a valid path on the Graph, otherwise False
        '''
-       ### BEGIN SOLUTION
 
        for i in range(len(path) - 1):
           if path[i] not in self.__adjacency_list:
             return False
        return True
 
-       ### END SOLUTION
 
     def get_shortest_bfs_path(self, start:str, target:str) -> tuple[str]:
         ''' Finds a shortest paths connecting the start vertex with the target vertex.
@@ -117,8 +108,6 @@ class Graph:
             int - the number of edges traversed to get from source to target in the shortest bfs path
                   invalid paths result in a path length of 0
         '''
-       ### BEGIN SOLUTION
-
 
         shortest_path = self.get_shortest_bfs_path(start, target)
         if shortest_path: 
@@ -126,7 +115,6 @@ class Graph:
         else:
           return 0
 
-       ### END SOLUTION
 
     def get_all_shortest_bfs_paths(self, source:str, target:str) -> set[tuple[str]]:
         ''' Finds all of the shortests paths connecting the start vertex with the target vertex.
@@ -139,7 +127,6 @@ class Graph:
             set[tuple[str]] - a set of tuples of str vertivces representing all of the shortest paths
                              from start node to target node
         '''
-        ### BEGIN SOLUTION
 
         paths = set()
         path_queue = [[source]]
@@ -161,7 +148,6 @@ class Graph:
         
         return {path for path in paths if len(path) == min_length}
 
-        ### END SOLUTION
 
 if __name__ == "__main__":
   binary_tree_graph ={
