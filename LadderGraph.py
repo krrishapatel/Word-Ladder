@@ -6,7 +6,6 @@ class LadderGraph(Graph):
     def __init__(self, word_list:list[str]):
         adj_list = self.build_adj_list(word_list)
         super().__init__(adj_list)
-        ### No changes needed. The Graph constructor takes care of everything else.
 
     def hamming_distance(self, w1:str, w2:str)-> int:
         '''Determines the hamming distance between two words
@@ -18,7 +17,6 @@ class LadderGraph(Graph):
         Returns:
             int: The number of characters that differ between w1 and w2
         '''
-        ### BEGIN SOLUTION
 
         distance = 0
         for char1, char2 in zip(w1, w2):
@@ -26,7 +24,6 @@ class LadderGraph(Graph):
                 distance += 1
         return distance
 
-        ### END SOLUTION
 
     def build_adj_list(self, word_list: list[str])-> dict[str, set[str]]:
         '''Builds an adjacency list modeling a graph where nodes are all words
@@ -38,7 +35,6 @@ class LadderGraph(Graph):
         Returns:
             dict[str, set[str]]: An adjacency list representation of the graph
         '''
-        ### BEGIN SOLUTION
 
         adj_list = {}
         for word in word_list:
@@ -50,7 +46,6 @@ class LadderGraph(Graph):
                     adj_list[word].add(other_word)
         return adj_list
    
-        ### END SOLUTION
 
     def is_valid_word(self, word:str) -> bool:
         '''Determines whether a word is present in the graph
@@ -61,11 +56,9 @@ class LadderGraph(Graph):
         Returns:
             bool: True if the word is in the graph, otherwise False
         '''       
-        ### BEGIN SOLUTION
 
         return word.lower() in self.vertices
 
-        ### END SOLUTION
 
     def is_valid_ladder(self, ladder:tuple[str]) -> bool:
        ''' Determines whether a given ladder is a valid path on the graph
@@ -76,7 +69,6 @@ class LadderGraph(Graph):
           Returns:
             bool - True if the given path is a valid path on the Graph, otherwise False
        '''
-       ### BEGIN SOLUTION
 
        if len(ladder) < 2:
           return False
@@ -88,8 +80,6 @@ class LadderGraph(Graph):
        return True
       
 
-       ### END SOLUTION
-
     def get_rung_length(self, ladder:tuple[str]) -> int:
         ''' Finds the number of rungs in the word ladder.
 
@@ -99,14 +89,11 @@ class LadderGraph(Graph):
           Returns:
             int - the number of rungs in a valid word ladder. Invalid word ladders return -1
         '''
-        ### BEGIN SOLUTION
 
         if not self.is_valid_ladder(ladder):
             return -1
         return len(ladder)-2
             
-
-        ### END SOLUTION
 
     def get_shortest_ladder(self, start:str, target:str) -> tuple[str]:
         '''Finds a shortest ladder connecting the start vertex with the target vertex.
@@ -118,13 +105,11 @@ class LadderGraph(Graph):
           Returns:
             tuple[str] - a tuple representing a word ladder connecting start and target
         '''
-        ### BEGIN SOLUTION
 
         if start.lower() not in self.vertices or target.lower() not in self.vertices:
             return tuple()
         return self.get_shortest_bfs_path(start.lower(), target.lower())
 
-        ### END SOLUTION
 
     def get_all_shortest_ladders(self, start:str, target:str) -> set[tuple[str]]:
         ''' Finds all of the shortests ladders connecting the start vertex with the target vertex.
@@ -136,13 +121,11 @@ class LadderGraph(Graph):
           Returns:
             set - a set of the shortests paths from start to target
         '''
-        ### BEGIN SOLUTION
         
         if start.lower() not in self.vertices or target.lower() not in self.vertices:
             return set()
         return self.get_all_shortest_bfs_paths(start.lower(), target.lower())
 
-        ### END SOLUTION
     
     def get_all_ladders(self, start:str, target:str, max_rungs=math.inf) -> set[tuple[str]]:
         ''' Finds all of the shortests paths connecting the start vertex with the target vertex.
@@ -155,7 +138,6 @@ class LadderGraph(Graph):
           Returns:
             set[tuple[str]]] - a set of tuples representing word ladders conecting start and target
         '''
-        ### BEGIN SOLUTION
 
         if start.lower() not in self.vertices or target.lower() not in self.vertices:
           return set()
@@ -175,8 +157,6 @@ class LadderGraph(Graph):
         return ladders
 
         
-        ### END SOLUTION
-
 if __name__ == "__main__":
   small_dictionary=["foul","fool","cool","pool","poll","pole","pope","pale","sale", "sage", "page", "pall", "fall", "fail", "foil"]
   myLadderGraph = LadderGraph(small_dictionary)
